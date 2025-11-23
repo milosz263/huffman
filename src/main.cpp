@@ -4,10 +4,6 @@
 
 namespace fs = std::filesystem;
 
-/**
- * @brief Command-line arguments are handled directly here.
- */
-
 int main(int argc, char** argv)
 {
     std::string exename = "";
