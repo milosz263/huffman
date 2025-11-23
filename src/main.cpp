@@ -42,11 +42,13 @@ int main(int argc, char** argv)
                 break;
             case 'i':
                 getFilename(argc,argv,i,inpath);
+                i++;
                 if (!fs::exists(fs::path(inpath)))
-                    exitInputFileDoesntExists(inpath);
+                    exitInputFileDoesntExist(inpath);
                 break;
             case 'o':
                 getFilename(argc,argv,i,outpath);
+                i++;
                 if (fs::exists(fs::path(outpath)))
                     exitOutputFileExists(outpath);
                 break;

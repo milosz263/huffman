@@ -45,7 +45,7 @@ void exitNoFileSpecified(std::string param)
     exit(EXIT_FAILURE);
 }
 
-void exitInputFileDoesntExists(std::string filename)
+void exitInputFileDoesntExist(std::string filename)
 {
     std::cerr
         << "error: Input file \"" << filename << "\" doesn't exist.";
@@ -55,7 +55,7 @@ void exitInputFileDoesntExists(std::string filename)
 void exitOutputFileExists(std::string filename)
 {
     std::cerr
-        << "error: Output file \"" << filename << "\"already exists.";
+        << "error: Output file \"" << filename << "\" already exists.";
     exit(EXIT_FAILURE);
 }
 

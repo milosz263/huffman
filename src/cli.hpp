@@ -52,7 +52,7 @@ void exitNoFileSpecified(std::string param);
  * 
  * @param filename 
  */
-void exitInputFileDoesntExists(std::string filename);
+void exitInputFileDoesntExist(std::string filename);
 
 /**
  * @brief Prints output file already exists error and exits.
