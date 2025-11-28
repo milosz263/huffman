@@ -1,8 +1,5 @@
 #include "cli.hpp"
-
-#include <filesystem>
-
-namespace fs = std::filesystem;
+#include "data.hpp"
 
 int main(int argc, char** argv)
 {
