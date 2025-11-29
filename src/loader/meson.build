@@ -1,3 +1,4 @@
 sources += files(
-    'loader.cpp'
+    'loader.cpp',
+    'fileinmemory.cpp'
 )

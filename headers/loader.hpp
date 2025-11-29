@@ -4,6 +4,7 @@
  */
 #pragma once
 #include <exception>
+#include <memory>
 #include "data.hpp"
 
 /**
@@ -83,4 +84,4 @@ public:
  * @param type Defaults to FileInMemoryLoader if invalid (not file based loader or none specified).
  * @return Instance of class implementing ILoader.
  */
-ILoader getLoaderFromFile(fs::path path, LoaderType type = LoaderType::FileInMemory);
+std::unique_ptr<ILoader> getLoaderFromFile(fs::path path, LoaderType type = LoaderType::FileInMemory);
