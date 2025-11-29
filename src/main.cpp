@@ -1,4 +1,4 @@
-#include "cli/cli.hpp"
+#include "cli.hpp"
 #include "data.hpp"
 
 int main(int argc, char** argv)

@@ -3,7 +3,7 @@
  * @todo Add Loader implementations that don't read entire file to memory.
  */
 #pragma once
-#include "../data.hpp"
+#include "data.hpp"
 
 /**
  * @brief Enum with all implementations of ILoader.
