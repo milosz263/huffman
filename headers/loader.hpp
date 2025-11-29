@@ -3,7 +3,15 @@
  * @todo Add Loader implementations that don't read entire file to memory.
  */
 #pragma once
+#include <exception>
 #include "data.hpp"
+
+/**
+ * @brief Exception type thrown when trying to access invalid postion.
+ * 
+ */
+class LoaderPositionException : public std::exception
+{};
 
 /**
  * @brief Enum with all implementations of ILoader.
