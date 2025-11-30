@@ -5,6 +5,14 @@
  */
 #pragma once
 
+#include <exception>
+/**
+ * @brief Exception type thrown when trying to use closed Writer or Loader.
+ * 
+ */
+class ClosedException : public std::exception
+{};
+
 #include <filesystem>
 namespace fs = std::filesystem;
 

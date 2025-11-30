@@ -11,7 +11,12 @@ public:
     void seek(size_t pos) override;
     size_t pos() override;
     size_t size() override;
+    void close() override;
+    virtual bool isClosed() override;
+    ~FileInMemoryLoader();
 private:
     size_t _pos;
     chunk _data;
+    bool _closed;
+    void _tryClosed();
 };

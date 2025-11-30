@@ -3,7 +3,6 @@
  * @todo Add Loader implementations that don't read entire file to memory.
  */
 #pragma once
-#include <exception>
 #include <memory>
 #include "data.hpp"
 
@@ -31,7 +30,7 @@ class ILoader
 public:
     /**
      * @brief Reads next byte.
-     * 
+     * @throws LoaderPositionException
      * @return byte 
      */
     virtual byte get() = 0;
@@ -46,13 +45,14 @@ public:
 
     /**
      * @param pos size_t
+     * @throws LoaderPositionException
      * @note if pos is invalid, then seeks to start (0).
      */
     virtual void seek(size_t pos) = 0;
 
     /**
      * @brief Gets current position.
-     * 
+     * @throws LoaderPositionException
      * @return size_t 
      */
     virtual size_t pos() = 0;
@@ -68,7 +68,19 @@ public:
      * @brief Check if at the end of underlying data.
      * @note Only non-virtual function in ILoader.
      */
-    bool end();
+    virtual bool end();
+
+    /**
+     * @brief Closes underlying buffer and blocks future reads.
+     */
+    virtual void close() = 0;
+
+    /**
+     * @brief Checks whether Loader is closed.
+     * 
+     * @return bool
+     */
+    virtual bool isClosed() = 0;
 
     /**
      * @brief Empty destructor.
