@@ -1,8 +1,6 @@
 #include "loader/fileinmemory.hpp"
 #include <fstream>
 
-#include <cassert>
-
 FileInMemoryLoader::FileInMemoryLoader(fs::path path)
 {
     _closed = false;
