@@ -5,7 +5,7 @@
         "type": "cppdbg",
         "request": "launch",
         "program": "${workspaceFolder}/build/huffman",
-        "args": [],
+        "args": ["-i", "testdata/randomstrings.txt", "-c", "-o", "o.out"],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],
