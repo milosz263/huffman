@@ -49,4 +49,4 @@ public:
     virtual ~IWriter(){}
 };
 
-class ToFileWriter;
+#include "writer/tofile.hpp"

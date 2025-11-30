@@ -65,3 +65,17 @@ void exitFlagsConflict()
         << "error: encode flag and decode flag can't be used alongside.";
     exit(EXIT_FAILURE);
 }
+
+void exitNoInputFileSpecified()
+{
+    std::cerr
+        << "error: No input file specified.\n";
+    exit(EXIT_FAILURE);
+}
+
+void exitNoOutputFileSpecified()
+{
+    std::cerr
+        << "error: No output file specified.\n";
+    exit(EXIT_FAILURE);
+}

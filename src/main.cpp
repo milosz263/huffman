@@ -1,8 +1,12 @@
 #include "cli.hpp"
+#include "writer.hpp"
+#include "loader.hpp"
+#include "huffman.hpp"
 #include "data.hpp"
 
 int main(int argc, char** argv)
 {
+    //argv parsing
     std::string exename = "";
     if (argv[0] != nullptr)
         exename = fs::path(argv[0]).filename();
@@ -31,7 +35,7 @@ int main(int argc, char** argv)
                 encode = true;
                 break;
             case 'd':
-                decode = false;
+                decode = true;
                 break;
             case 'i':
                 getFilename(argc,argv,i,inpath);
@@ -54,5 +58,24 @@ int main(int argc, char** argv)
     {
         exitFlagsConflict();
     }
+    if (inpath == "")
+    {
+        exitNoInputFileSpecified();
+    }
+    if (outpath == "")
+    {
+        exitNoOutputFileSpecified();
+    }
+
+    //doing
+
+    auto loader = getLoaderFromFile(fs::path(inpath));
+    auto writer = ToFileWriter(fs::path(outpath));
+
+    if(decode)
+        huffman::Decode(*loader, writer);
+    else
+        huffman::Encode(*loader, writer);
+
     return EXIT_SUCCESS;
 }

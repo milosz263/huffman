@@ -41,7 +41,7 @@ void exitBadParameter(std::string param);
 void exitDuplicateParameter(std::string param);
 
 /**
- * @brief Prints duplicate parameter error and exits.
+ * @brief Prints no file specified error and exits.
  * 
  * @param param parameter which needed file.
  */
@@ -63,6 +63,15 @@ void exitOutputFileExists(std::string filename);
 
 /**
  * @brief Prints error abour using both encode and decode flag and exits.
- * 
  */
 void exitFlagsConflict();
+
+/**
+ * @brief Prints no input file specified error and exits.
+ */
+void exitNoInputFileSpecified();
+
+/**
+ * @brief Prints no output file specified error and exits.
+ */
+void exitNoOutputFileSpecified();
