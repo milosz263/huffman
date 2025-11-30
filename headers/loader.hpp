@@ -30,7 +30,7 @@ class ILoader
 public:
     /**
      * @brief Reads next byte.
-     * @throws LoaderPositionException
+     * @throws LoaderPositionException, ClosedException
      * @return byte 
      */
     virtual byte get() = 0;
@@ -38,6 +38,7 @@ public:
     /**
      * @brief Reads next maxSize bytes.
      * @note If underlying data ends before maxSize then reads until end.
+     * @throws ClosedException
      * @param maxSize size_t
      * @return chunk 
      */
@@ -45,30 +46,30 @@ public:
 
     /**
      * @param pos size_t
-     * @throws LoaderPositionException
+     * @throws LoaderPositionException, ClosedException
      * @note if pos is invalid, then seeks to start (0).
      */
     virtual void seek(size_t pos) = 0;
 
     /**
      * @brief Gets current position.
-     * @throws LoaderPositionException
+     * @throws ClosedException
      * @return size_t 
      */
     virtual size_t pos() = 0;
 
     /**
      * @brief Gets size of underlying data.
-     * 
+     * @throws ClosedException
      * @return size_t 
      */
     virtual size_t size() = 0;
 
     /**
      * @brief Check if at the end of underlying data.
-     * @note Only non-virtual function in ILoader.
+     * @throws ClosedException
      */
-    virtual bool end();
+    virtual bool end() = 0;
 
     /**
      * @brief Closes underlying buffer and blocks future reads.

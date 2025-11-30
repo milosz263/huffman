@@ -12,7 +12,8 @@ public:
     size_t pos() override;
     size_t size() override;
     void close() override;
-    virtual bool isClosed() override;
+    bool isClosed() override;
+    bool end() override;
     ~FileInMemoryLoader();
 private:
     size_t _pos;

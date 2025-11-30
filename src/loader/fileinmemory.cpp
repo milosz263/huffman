@@ -66,6 +66,12 @@ bool FileInMemoryLoader::isClosed()
     return _closed;
 }
 
+bool FileInMemoryLoader::end()
+{
+    _tryClosed();
+    return (_pos == _data.size()-1);
+}
+
 void FileInMemoryLoader::_tryClosed()
 {
     if (_closed)
