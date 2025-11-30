@@ -3,3 +3,4 @@ sources = files(
 )
 subdir('cli')
 subdir('loader')
+subdir('writer')
