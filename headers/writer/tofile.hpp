@@ -14,7 +14,7 @@ public:
     bool isClosed() override;
     ~ToFileWriter();
 private:
-    std::basic_ofstream<byte> _file;
+    std::ofstream _file;
     bool _closed;
     void _tryClosed();
 };

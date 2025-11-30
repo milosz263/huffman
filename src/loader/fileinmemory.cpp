@@ -1,16 +1,18 @@
 #include "loader/fileinmemory.hpp"
 #include <fstream>
+
 #include <cassert>
 
 FileInMemoryLoader::FileInMemoryLoader(fs::path path)
 {
     _closed = false;
-    std::basic_ifstream<byte> file;
+    //why basic_i/ofstream is a template when it fails on something as simple as typedef'd unsigned char?
+    std::ifstream file;
+    file.exceptions(std::ios::failbit | std::ios::badbit);
     file.open(path, std::ios::binary);
     size_t size = fs::file_size(path);
     _data.resize(size);
-    file.read(_data.data(), size);
-    assert(file.tellg() == size-1);
+    file.read(reinterpret_cast<char*>(_data.data()), size);
     file.close();
     _pos = 0;
 
