@@ -23,7 +23,7 @@ public:
      * @throws ClosedException
      * @param c chunk to be written.
      */
-    virtual void writeChunk(chunk c) = 0;
+    virtual void writeChunk(chunk &c) = 0;
 
     /**
      * @brief Closes underlying buffer and blocks future writes.

@@ -29,7 +29,7 @@ chunk FileInMemoryLoader::getChunk(size_t maxSize)
     if (maxSize == 0 || _data.size() == _pos)
         return chunk(0);
     if (_pos + maxSize <= _data.size())
-        maxSize = _data.size() - (_pos + 1);
+        maxSize = _data.size() - (_pos);
     chunk ret(_data.begin() + _pos, _data.begin() + _pos + maxSize);
     _pos += maxSize;
     return ret;
@@ -69,7 +69,7 @@ bool FileInMemoryLoader::isClosed()
 bool FileInMemoryLoader::end()
 {
     _tryClosed();
-    return (_pos == _data.size()-1);
+    return (_pos == _data.size());
 }
 
 void FileInMemoryLoader::_tryClosed()

@@ -14,7 +14,7 @@ void ToFileWriter::write(byte b)
     _file.put(*reinterpret_cast<char*>(&b));
 }
 
-void ToFileWriter::writeChunk(chunk c)
+void ToFileWriter::writeChunk(chunk &c)
 {
     _tryClosed();
     //why basic_i/ofstream is a template when it fails on something as simple as typedef'd unsigned char?

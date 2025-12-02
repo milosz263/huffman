@@ -8,7 +8,7 @@ class ToFileWriter : public IWriter
 public:
     ToFileWriter(fs::path path);
     void write(byte b) override;
-    void writeChunk(chunk c) override;
+    void writeChunk(chunk &c) override;
     void close() override;
     void sync() override;
     bool isClosed() override;
