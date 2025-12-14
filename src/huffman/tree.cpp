@@ -1,4 +1,5 @@
 #include "huffman/tree.hpp"
+namespace huffman::internal {
 
 bytecount CountBytes(ILoader &loader)
 {
@@ -9,4 +10,6 @@ bytecount CountBytes(ILoader &loader)
         ret[loader.get()]++;
     }
     return ret;
+}
+
 }

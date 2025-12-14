@@ -3,6 +3,7 @@
 #include "loader.hpp"
 
 #include <array>
+namespace huffman::internal {
 /**
  * @brief Typedef to std::array<size_t, 256>
  * 
@@ -16,3 +17,4 @@ typedef std::array<size_t, 256> bytecount;
  * @return bytecount 
  */
 bytecount CountBytes(ILoader &loader);
+}
