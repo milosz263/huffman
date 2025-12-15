@@ -47,5 +47,11 @@ node* createtree(ILoader &loader)
     queue.pop();
     return root;
 }
-
+void addbit(code &c, byte bit)
+{
+    for (int i = 0; i < 31; i++)
+    {
+        byte lostbit = c.data[i] & 1;
+    }
+}
 }

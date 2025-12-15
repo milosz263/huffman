@@ -25,10 +25,18 @@ class nodecmp
     }
 };
 
+
 node* createtree(ILoader &loader);
 
-void debugprintree(node* root);
-
 void deletetree(node* top);
+
+struct code
+{
+    byte data[32] = {};
+    uint16_t bitsize = 0;
+};
+void addbit(code &c, byte bit);
+
+typedef std::array<code, 257> codetable;
 
 }
