@@ -30,3 +30,19 @@ typedef uint8_t byte;
  * 
  */
 typedef std::vector<byte> chunk;
+
+ /**
+  * @brief Splits one uint16_t into 2 bytes, little-endian.
+  * 
+  * @param val value to be splitted
+  * @param ret Pointer to 2-element array.
+  */
+void splituint16(uint16_t val, byte* ret);
+
+/**
+ * @brief Reads one uint16_t from 2 bytes, little-endian.
+ * 
+ * @param val Pointer to 2-element array.
+ * @return uint16_t 
+ */
+uint16_t readuint16(byte* val);
