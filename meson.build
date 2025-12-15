@@ -1,5 +1,5 @@
 project('huffman', 'cpp',
-    default_options : ['cpp_std=c++17'])
+    default_options : ['cpp_std=c++20'])
 
 subdir('src')
 #sources defined in ./src
