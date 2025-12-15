@@ -14,8 +14,9 @@ namespace huffman
     void Decode(ILoader &loader, IWriter &writer);
     namespace internal
     {
-        typedef uint_fast16_t hval;
+        typedef uint16_t hval;
         constexpr hval eof = 256;
         constexpr hval empty = 257;
     }
+    
 }
