@@ -1,6 +1,7 @@
 sources = files(
     'main.cpp',
-    'placeholder.cpp'
+    'placeholder.cpp',
+    'data.cpp'
 )
 subdir('cli')
 subdir('loader')
