@@ -47,11 +47,20 @@ node* createtree(ILoader &loader)
     queue.pop();
     return root;
 }
-void addbit(code &c, byte bit)
+//TODO: benchmark this vs just using strings of '0' and '1'
+code addbit(code c, byte bit)
 {
+    byte lostbit = 0;
+    byte oldbit = 0;
     for (int i = 0; i < 31; i++)
     {
-        byte lostbit = c.data[i] & 1;
+        lostbit = c.data[i] & 1;
+        c.data[i] >>= 1;
+        c.data[i] |= oldbit;
+        lostbit = oldbit;
     }
+    bit <<= 7;
+    c.data[0] |= bit;
+    return c;
 }
 }

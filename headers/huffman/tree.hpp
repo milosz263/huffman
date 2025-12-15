@@ -35,7 +35,8 @@ struct code
     byte data[32] = {};
     uint16_t bitsize = 0;
 };
-void addbit(code &c, byte bit);
+
+code addbit(code c, byte bit);
 
 typedef std::array<code, 257> codetable;
 
