@@ -1,20 +1,34 @@
 #pragma once
 #include "data.hpp"
 #include "loader.hpp"
-
+#include "huffman.hpp"
 #include <array>
-namespace huffman::internal {
-/**
- * @brief Typedef to std::array<size_t, 256>
- * 
- */
-typedef std::array<size_t, 256> bytecount;
+#include <unordered_map>
 
-/**
- * @brief Count how many of every byte are in data. Seeks loader to 0 at start.
- * 
- * @param loader ILoader
- * @return bytecount 
- */
-bytecount CountBytes(ILoader &loader);
+namespace huffman::internal {
+
+struct node
+{
+    size_t count;
+    hval data;
+    node* left;
+    node* right;
+
+};
+class nodecmp
+{
+    public:
+    bool operator() (node *a, node *b)
+    {
+        //we need lowest first
+        return a->count > b->count;
+    }
+};
+
+node* createtree(ILoader &loader);
+
+void debugprintree(node* root);
+
+void deletetree(node* top);
+
 }
