@@ -4,6 +4,7 @@
 #include "huffman.hpp"
 #include <array>
 #include <unordered_map>
+#include <bitset>
 
 namespace huffman::internal {
 
@@ -13,8 +14,8 @@ struct node
     hval data;
     node* left;
     node* right;
-
 };
+
 class nodecmp
 {
     public:
@@ -32,12 +33,18 @@ void deletetree(node* top);
 
 struct code
 {
-    byte data[32] = {};
+    std::bitset<257> data;
     uint16_t bitsize = 0;
 };
 
-code addbit(code c, byte bit);
-
 typedef std::array<code, 257> codetable;
+
+codetable treetotable(node* root);
+
+code addbit(code code, byte bit);
+
+void writetable(IWriter &writer, codetable codes);
+
+codetable readtable(IWriter &writer);
 
 }

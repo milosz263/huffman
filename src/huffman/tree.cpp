@@ -47,20 +47,43 @@ node* createtree(ILoader &loader)
     queue.pop();
     return root;
 }
-//TODO: benchmark this vs just using strings of '0' and '1'
-code addbit(code c, byte bit)
+
+void deletetree(node *top)
 {
-    byte lostbit = 0;
-    byte oldbit = 0;
-    for (int i = 0; i < 31; i++)
+    if (top == nullptr)
+        return;
+    deletetree(top->left);
+    deletetree(top->right);
+    delete top;
+}
+
+void treetotable(node *root, codetable &tab, code c)
+{
+    if (root->data != empty)
     {
-        lostbit = c.data[i] & 1;
-        c.data[i] >>= 1;
-        c.data[i] |= oldbit;
-        lostbit = oldbit;
+        tab[root->data] = c;
+        return;
     }
-    bit <<= 7;
-    c.data[0] |= bit;
-    return c;
+    treetotable(root->left, tab, addbit(c, 0));
+    treetotable(root->right, tab, addbit(c, 1));
+}
+
+code addbit(code code, byte bit)
+{
+    code.data >>= 1;
+    code.bitsize++;
+    code.data[0] = bit;
+    return code;
+}
+
+void writetable(IWriter &writer, codetable codes)
+{
+    //1. Section header: 00 01, or 256 in little endian
+    writer.write(0);
+    writer.write(1);
+    //2. code for end of file, without character
+    
+    //3. Rest of codes, in format: [0] - character, [1-2] - code size (in bits, uint16-le), [3+] code, ...
+
 }
 }
