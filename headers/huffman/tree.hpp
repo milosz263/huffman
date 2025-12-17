@@ -19,11 +19,7 @@ struct node
 class nodecmp
 {
     public:
-    bool operator() (node *a, node *b)
-    {
-        //we need lowest first
-        return a->count > b->count;
-    }
+    bool operator() (node *a, node *b);
 };
 
 

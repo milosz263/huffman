@@ -3,6 +3,12 @@
 #include <queue>
 namespace huffman::internal {
 
+bool nodecmp::operator() (node *a, node *b)
+{
+    //we need lowest first
+    return a->count > b->count;
+}
+
 node* createtree(ILoader &loader)
 {
     size_t counter[256] = {};
