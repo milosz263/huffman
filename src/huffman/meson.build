@@ -1,3 +1,4 @@
 sources += files(
-    'tree.cpp'
+    'tree.cpp',
+    'encode.cpp'
 )

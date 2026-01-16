@@ -41,6 +41,6 @@ code addbit(code code, byte bit);
 
 void writetable(IWriter &writer, codetable codes);
 
-codetable readtable(IWriter &writer);
+chunk savebinarycode(code code);
 
 }

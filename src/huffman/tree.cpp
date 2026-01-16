@@ -81,15 +81,4 @@ code addbit(code code, byte bit)
     code.data[0] = bit;
     return code;
 }
-
-void writetable(IWriter &writer, codetable codes)
-{
-    //1. Section header: 00 01, or 256 in little endian
-    writer.write(0);
-    writer.write(1);
-    //2. code for end of file, without character
-    
-    //3. Rest of codes, in format: [0] - character, [1-2] - code size (in bits, uint16-le), [3+] code, ...
-
-}
 }
