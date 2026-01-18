@@ -3,6 +3,26 @@
 #include "huffman/internal.hpp"
 #include <cmath>
 
+static inline void writecodedbyte(huffman::internal::code &x, uint_fast8_t &bytepos, IWriter &writer, byte &currentwrite)
+{
+    for (size_t i = 0; i < x.bitsize; i++)
+    {
+        if (bytepos == 8)
+        {
+            bytepos = 0;
+            writer.write(currentwrite);
+            currentwrite = 0;
+        }
+        byte bit = 0;
+        if (x.data[i])
+        {
+            bit = 1 << bytepos;
+            currentwrite |= bit;
+        }
+        bytepos++;
+    }
+}
+
 void huffman::Encode(ILoader &loader, IWriter &writer)
 {
     auto tree = internal::createtree(loader);
@@ -16,23 +36,10 @@ void huffman::Encode(ILoader &loader, IWriter &writer)
     {
         byte current = loader.get();
         auto x = codes[current];
-        for (size_t i = 0; i < x.bitsize; i++)
-        {
-            if (bytepos == 8)
-            {
-                bytepos = 0;
-                writer.write(currentwrite);
-                currentwrite = 0;
-            }
-            byte bit = 0;
-            if (x.data[i])
-            {
-                bit = 1 << bytepos;
-                currentwrite |= bit;
-            }
-            bytepos++;
-        }
+        writecodedbyte(x, bytepos, writer, currentwrite);
     }
+    writecodedbyte(codes[internal::eof], bytepos, writer, currentwrite);
+    writer.write(currentwrite);
 }
 
 namespace huffman::internal {
