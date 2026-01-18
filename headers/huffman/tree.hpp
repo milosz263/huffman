@@ -1,7 +1,8 @@
 #pragma once
 #include "data.hpp"
 #include "loader.hpp"
-#include "huffman.hpp"
+#include "writer.hpp"
+#include "huffman/internal.hpp"
 #include <array>
 #include <unordered_map>
 #include <bitset>
@@ -41,6 +42,6 @@ code addbit(code code, byte bit);
 
 void writetable(IWriter &writer, codetable codes);
 
-chunk savebinarycode(code code);
+chunk getbinarycode(code code);
 
 }

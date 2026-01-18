@@ -1,5 +1,39 @@
 #include "huffman/tree.hpp"
+#include "huffman.hpp"
+#include "huffman/internal.hpp"
 #include <cmath>
+
+void huffman::Encode(ILoader &loader, IWriter &writer)
+{
+    auto tree = internal::createtree(loader);
+    auto codes = internal::treetotable(tree);
+    deletetree(tree);
+    writetable(writer, codes);
+    loader.seek(0);
+    uint_fast8_t bytepos = 0;
+    byte currentwrite = 0;
+    while (!loader.end())
+    {
+        byte current = loader.get();
+        auto x = codes[current];
+        for (size_t i = 0; i < x.bitsize; i++)
+        {
+            if (bytepos == 8)
+            {
+                bytepos = 0;
+                writer.write(currentwrite);
+                currentwrite = 0;
+            }
+            byte bit = 0;
+            if (x.data[i])
+            {
+                bit = 1 << bytepos;
+                currentwrite |= bit;
+            }
+            bytepos++;
+        }
+    }
+}
 
 namespace huffman::internal {
 
@@ -7,6 +41,17 @@ void writetable(IWriter &writer, codetable codes)
 {
     byte codesize[2];
     chunk bincode;
+    //0. Number of elements, in uint16le
+    uint16_t num = 0;
+    for (auto i : codes)
+    {
+        if (i.bitsize != 0)
+        num++;
+    }
+    byte numbytes[2];
+    splituint16(num, numbytes);
+    writer.write(numbytes[0]);
+    writer.write(numbytes[1]);
     //1. Section header: 00 01, or 256 in little endian
     writer.write(0);
     writer.write(1);
@@ -23,14 +68,14 @@ void writetable(IWriter &writer, codetable codes)
             splituint16(codes[i].bitsize, codesize);
             writer.write(codesize[0]);
             writer.write(codesize[1]);
-            bincode = savebinarycode(codes[i]);
+            bincode = getbinarycode(codes[i]);
             writer.writeChunk(bincode);
         }
         if (i == 255)
             break;
     }
 }
-chunk savebinarycode(code code)
+chunk getbinarycode(code code)
 {
     chunk ret(std::ceil(code.bitsize / 8.0));
     for (uint_fast16_t i = 0; i < ret.size(); i++)

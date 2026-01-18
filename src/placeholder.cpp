@@ -3,14 +3,14 @@
 #include "huffman.hpp"
 #include <iostream>
 
-static void rewrite(ILoader &loader, IWriter &writer)
-{
-    while (!loader.end())
-    {
-        writer.write(loader.get());
-    }
-    writer.close();
-}
+// static void rewrite(ILoader &loader, IWriter &writer)
+// {
+//     while (!loader.end())
+//     {
+//         writer.write(loader.get());
+//     }
+//     writer.close();
+// }
 
 static void rewrite_chunk(ILoader &loader, IWriter &writer)
 {
@@ -20,11 +20,11 @@ static void rewrite_chunk(ILoader &loader, IWriter &writer)
     writer.close();
 }
 
-void huffman::Encode(ILoader &loader, IWriter &writer)
-{
-    std::cout << "Calling huffman::Encode(), rewriting by byte" << std::endl;
-    rewrite(loader, writer);
-}
+// void huffman::Encode(ILoader &loader, IWriter &writer)
+// {
+//     std::cout << "Calling huffman::Encode(), rewriting by byte" << std::endl;
+//     rewrite(loader, writer);
+// }
 
 void huffman::Decode(ILoader &loader, IWriter &writer)
 {
