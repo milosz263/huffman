@@ -63,7 +63,8 @@ void deletetree(node *top)
     delete top;
 }
 
-void treetotable(node *root, codetable &tab, code c)
+//Don't need to expose recursion only params.
+static void treetotable(node *root, codetable &tab, code c)
 {
     if (root->data != empty)
     {
@@ -72,6 +73,15 @@ void treetotable(node *root, codetable &tab, code c)
     }
     treetotable(root->left, tab, addbit(c, 0));
     treetotable(root->right, tab, addbit(c, 1));
+}
+
+codetable treetotable(node* root)
+{
+    codetable ret = {};
+    code c;
+    c.bitsize = 0;
+    treetotable(root, ret, c);
+    return ret;
 }
 
 code addbit(code code, byte bit)
