@@ -48,7 +48,7 @@ void writetable(IWriter &writer, codetable codes)
 {
     byte codesize[2];
     chunk bincode;
-    //0. Number of elements, in uint16le
+    //0. Number of elements, in uint16-le
     uint16_t num = 0;
     for (auto i : codes)
     {
@@ -66,6 +66,8 @@ void writetable(IWriter &writer, codetable codes)
     splituint16(codes[eof].bitsize, codesize);
     writer.write(codesize[0]);
     writer.write(codesize[1]);
+    bincode = getbinarycode(codes[eof]);
+    writer.writeChunk(bincode);
     //3. Rest of codes, in format: [0] - character, [1-2] - code size (in bits, uint16-le), [3+] code, ...
     for (byte i = 0; /* check at the end of loop */; i++)
     {
@@ -93,9 +95,8 @@ chunk getbinarycode(code code)
             auto pos = i*8 + j;
             if (pos > code.bitsize)
                 break;
-            curr <<= 1;
             if (code.data[pos])
-                curr |= 1;
+                curr |= (1 << j);
         }
         ret[i] = curr;
     }

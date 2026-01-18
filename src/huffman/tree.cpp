@@ -29,10 +29,10 @@ node* createtree(ILoader &loader)
         if (counter[i] == 0)
             continue;
         node* n = new node;
-        end->data = i;
-        end->count = counter[i];
-        end->left = nullptr;
-        end->right = nullptr;
+        n->data = i;
+        n->count = counter[i];
+        n->left = nullptr;
+        n->right = nullptr;
         queue.push(n);
     }
     while (queue.size() >= 2)
@@ -43,10 +43,10 @@ node* createtree(ILoader &loader)
         queue.pop();
 
         node* n = new node;
-        end->data = empty;
-        end->count = l->count + r->count;
-        end->left = l;
-        end->right = r;
+        n->data = empty;
+        n->count = l->count + r->count;
+        n->left = l;
+        n->right = r;
         queue.push(n);
     }
     node* root = queue.top();
@@ -86,7 +86,7 @@ codetable treetotable(node* root)
 
 code addbit(code code, byte bit)
 {
-    code.data >>= 1;
+    code.data <<= 1;
     code.bitsize++;
     code.data[0] = bit;
     return code;
