@@ -11,7 +11,7 @@ bool nodecmp::operator()(const node *a, const node *b)
 
 bool codecmp::operator()(const code &a, const code &b)
 {
-    return (a.bitsize == b.bitsize && a.data == a.data);
+    return (a.bitsize == b.bitsize && a.data == b.data);
 }
 
 bool codehash::operator()(const code& c)

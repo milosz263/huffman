@@ -3,6 +3,7 @@
 #include "huffman/internal.hpp"
 #include <cmath>
 
+
 void huffman::Decode(ILoader &loader, IWriter &writer)
 {
     using internal::code;
@@ -26,7 +27,7 @@ void huffman::Decode(ILoader &loader, IWriter &writer)
     // 2. code for end of file, without character
     if (elems == 0)
         throw UnsupportedFileException();
-    code ceof;
+    code ceof = {};
     elems--;
     ch = internal::eof;
     bu16[0] = loader.get();
@@ -40,7 +41,7 @@ void huffman::Decode(ILoader &loader, IWriter &writer)
         for (int_fast8_t j = 0; j < 8 && ceof.bitsize < codesize; j++)
             ceof.data[ceof.bitsize++] = ((b >> j) & 1);
     }
-    map.insert(std::make_pair(ceof, ch));
+    map.emplace(ceof, ch);
     // 3. Rest of codes, in format: [0] - character, [1-2] - code size (in bits, uint16-le), [3+] code, ...
     for (int_fast16_t i = 0; i < elems; i++)
     {
@@ -57,9 +58,8 @@ void huffman::Decode(ILoader &loader, IWriter &writer)
             for (int_fast8_t j = 0; j < 8 && c.bitsize < codesize; j++)
                 c.data[c.bitsize++] = ((b >> j) & 1);
         }
-        map.insert(std::make_pair(c, ch));
+        map.emplace(c, ch);
     }
-
     {
         code c = {};
         byte b = loader.get();
