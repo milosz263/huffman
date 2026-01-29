@@ -1,11 +1,35 @@
 {
     "configurations": [
     {
-        "name": "(gdb) Launch",
+        "name": "(gdb) Encode",
         "type": "cppdbg",
         "request": "launch",
         "program": "${workspaceFolder}/build/huffman",
-        "args": ["-i", "testdata/small.bin", "-c", "-o", "o.out"],
+        "args": ["-i", "testdata/onechar.txt", "-c", "-o", "o.out"],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "setupCommands": [
+            {
+                "description": "Enable pretty-printing for gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+            },
+            {
+                "description": "Set Disassembly Flavor to Intel",
+                "text": "-gdb-set disassembly-flavor intel",
+                "ignoreFailures": true
+            }
+        ]
+    },
+    {
+        "name": "(gdb) Decode",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/build/huffman",
+        "args": ["-i", "o.out", "-d", "-o", "decode.out"],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],
@@ -25,4 +49,5 @@
         ]
     }
     ]
+    
 }
