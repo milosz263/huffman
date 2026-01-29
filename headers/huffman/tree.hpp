@@ -57,6 +57,6 @@ void writetable(IWriter &writer, codetable codes);
 
 chunk getbinarycode(code code);
 
-std::unordered_map<code, byte, codehash, codecmp> codemap; 
+typedef std::unordered_map<code, hval, codehash, codecmp> codemap; 
 
 }
