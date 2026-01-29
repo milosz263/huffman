@@ -4,8 +4,8 @@
 #include "writer.hpp"
 #include "huffman/internal.hpp"
 #include <array>
-#include <unordered_map>
 #include <bitset>
+#include <unordered_map>
 
 namespace huffman::internal {
 
@@ -56,5 +56,7 @@ code addbit(code code, byte bit);
 void writetable(IWriter &writer, codetable codes);
 
 chunk getbinarycode(code code);
+
+std::unordered_map<code, byte, codehash, codecmp> codemap; 
 
 }
