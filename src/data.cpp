@@ -3,8 +3,10 @@
 #include <type_traits>
 #include <utility>
 #include <cstring>
+#include <climits>
 
 static_assert(std::endian::native == std::endian::little || std::endian::native == std::endian::big, "Can't determine endianness of system.");
+static_assert(CHAR_BIT == 8, "Systems that don't have 8 bits per byte are not supported.");
 
 void splituint16(uint16_t val, byte* ret)
 {
