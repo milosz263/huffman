@@ -20,7 +20,7 @@ struct node
 class nodecmp
 {
     public:
-    bool operator() (node *a, node *b);
+    static bool operator() (const node *a, const node *b);
 };
 
 
@@ -33,6 +33,19 @@ struct code
     std::bitset<257> data;
     uint16_t bitsize = 0;
 };
+
+class codecmp
+{
+    public:
+    static bool operator() (const code &a, const code &b);
+};
+
+class codehash
+{
+    public:
+    static bool operator() (const code& c);
+};
+
 
 typedef std::array<code, 257> codetable;
 

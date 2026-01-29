@@ -3,10 +3,22 @@
 #include <queue>
 namespace huffman::internal {
 
-bool nodecmp::operator() (node *a, node *b)
+bool nodecmp::operator()(const node *a, const node *b)
 {
     //we need lowest first
     return a->count > b->count;
+}
+
+bool codecmp::operator()(const code &a, const code &b)
+{
+    return (a.bitsize == b.bitsize && a.data == a.data);
+}
+
+bool codehash::operator()(const code& c)
+{
+    auto a = std::hash<std::bitset<257>>{}(c.data);
+    a ^= c.bitsize;
+    return a;
 }
 
 node* createtree(ILoader &loader)
