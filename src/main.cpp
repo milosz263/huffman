@@ -3,6 +3,7 @@
 #include "loader.hpp"
 #include "huffman.hpp"
 #include "data.hpp"
+#include <cassert>
 
 int main(int argc, char** argv)
 {
@@ -46,8 +47,10 @@ int main(int argc, char** argv)
             case 'o':
                 getFilename(argc,argv,i,outpath);
                 i++;
+                #ifdef NDEBUG
                 if (fs::exists(fs::path(outpath)))
                     exitOutputFileExists(outpath);
+                #endif
                 break;
             default:
                 exitBadParameter(argument);
