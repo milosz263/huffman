@@ -3,7 +3,6 @@
 #include "huffman/internal.hpp"
 #include <cmath>
 
-
 void huffman::Decode(ILoader &loader, IWriter &writer)
 {
     using internal::code;
@@ -45,7 +44,7 @@ void huffman::Decode(ILoader &loader, IWriter &writer)
     // 3. Rest of codes, in format: [0] - character, [1-2] - code size (in bits, uint16-le), [3+] code, ...
     for (int_fast16_t i = 0; i < elems; i++)
     {
-        code c;
+        code c = {};
         ch = loader.get();
         bu16[0] = loader.get();
         bu16[1] = loader.get();
@@ -76,6 +75,7 @@ void huffman::Decode(ILoader &loader, IWriter &writer)
             for (; i < 8 && !endfile; i++)
             {
                 c.data[c.bitsize++] = (b >> i) & 1;
+
                 if (map.count(c) == 1)
                 {
                     auto x = map[c];

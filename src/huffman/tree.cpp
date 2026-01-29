@@ -98,9 +98,15 @@ codetable treetotable(node* root)
 
 code addbit(code code, byte bit)
 {
-    code.data <<= 1;
-    code.bitsize++;
-    code.data[0] = bit;
+    code.data[code.bitsize++] = bit;
     return code;
+}
+/**
+ * @brief Not implemented
+ * @todo Implement decoding based on tree instead of map
+ */
+node* buildtree(ILoader &loader)
+{
+    
 }
 }
