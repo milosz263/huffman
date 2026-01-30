@@ -114,16 +114,17 @@ code addbit(code code, byte bit);
 
 /**
  * @brief Writes codetable to file in binary format.
- * Format: 
- * 0. Number of elements, in uint16-le
- * 1. Section header: 00 01, or 256 in little endian
- * 2. code for end of file, without character:
- * 2a. [0-1] - code size (in bits, uint16-le)
- * 2b. [3+]  - code
- * 3. Rest of codes
- * 3a. [0]   - character
- * 3b. [2-3] - code size (in bits, uint16-le)
- * 3c. [4+]  - code
+ *
+ * Format:
+ * 1. Number of elements, in uint16-le
+ * 2. Section header: 00 01, or 256 in little endian
+ * 3. code for end of file, without character:
+ * 3a. [0-1] - code size (in bits, uint16-le)
+ * 3b. [3+]  - code
+ * 4. Rest of codes
+ * 4a. [0]   - character
+ * 4b. [2-3] - code size (in bits, uint16-le)
+ * 4c. [4+]  - code
  * @param writer IWriter
  * @param codes codetable
  */
