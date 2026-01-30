@@ -14,7 +14,7 @@ bool codecmp::operator()(const code &a, const code &b)
     return (a.bitsize == b.bitsize && a.data == b.data);
 }
 
-bool codehash::operator()(const code& c)
+size_t codehash::operator()(const code& c)
 {
     auto a = std::hash<std::bitset<257>>{}(c.data);
     a ^= c.bitsize;
@@ -101,12 +101,6 @@ code addbit(code code, byte bit)
     code.data[code.bitsize++] = bit;
     return code;
 }
-/**
- * @brief Not implemented
- * @todo Implement decoding based on tree instead of map
- */
-node* buildtree(ILoader &loader)
-{
     
 }
 }
