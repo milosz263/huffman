@@ -5,7 +5,7 @@
         "type": "cppdbg",
         "request": "launch",
         "program": "${workspaceFolder}/build/huffman",
-        "args": ["-i", "testdata/5KiB.txt", "-c", "-o", "o.out"],
+        "args": ["-i", "testdata/large.txt", "-c", "-o", "o.out"],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],
