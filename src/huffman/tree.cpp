@@ -17,7 +17,8 @@ bool codecmp::operator()(const code &a, const code &b)
 size_t codehash::operator()(const code& c)
 {
     auto a = std::hash<std::bitset<257>>{}(c.data);
-    a ^= c.bitsize;
+    a <<= 16;
+    a += c.bitsize;
     return a;
 }
 
@@ -102,5 +103,4 @@ code addbit(code code, byte bit)
     return code;
 }
     
-}
 }
