@@ -76,28 +76,69 @@ class codecmp
 };
 
 /**
- * @brief Class generating hash
+ * @brief Class generating hash.
  * 
  */
 class codehash
 {
     public:
+    /**
+     * @return size_t
+     */
     static size_t operator() (const code& c);
 };
 
 
+/**
+ * @brief typedef to array of 257 (256 charaters + end of file) code elements.
+ * 
+ */
 typedef std::array<code, 257> codetable;
 
+/**
+ * @brief Converts Huffman table to codetable.
+ * 
+ * @param root node* pointer to top element in tree.
+ * @return codetable 
+ */
 codetable treetotable(node* root);
 
+/**
+ * @brief Inserts next bit to code.
+ * 
+ * @param code 
+ * @param bit byte, only least significant bit is used.
+ * @return code with inserted bit.
+ */
 code addbit(code code, byte bit);
 
+/**
+ * @brief Writes codetable to file in binary format.
+ * Format: 
+ * 0. Number of elements, in uint16-le
+ * 1. Section header: 00 01, or 256 in little endian
+ * 2. code for end of file, without character:
+ * 2a. [0-1] - code size (in bits, uint16-le)
+ * 2b. [3+]  - code
+ * 3. Rest of codes
+ * 3a. [0]   - character
+ * 3b. [2-3] - code size (in bits, uint16-le)
+ * 3c. [4+]  - code
+ * @param writer IWriter
+ * @param codes codetable
+ */
 void writetable(IWriter &writer, codetable codes);
 
+/**
+ * @brief Converts code to binary.
+ * 
+ * @param code 
+ * @return chunk 
+ */
 chunk getbinarycode(code code);
 
 /**
- * @brief 
+ * @brief typedef to std::unordered_map with code as key and hval as value.
  */
 typedef std::unordered_map<code, hval, codehash, codecmp> codemap; 
 

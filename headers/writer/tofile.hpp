@@ -1,8 +1,18 @@
+/**
+ * @file writer/tofile.hpp
+ * Internal file.
+ * 
+ */
 #pragma once
 
 #include <fstream>
 #include "writer.hpp"
 
+/**
+ * @brief Class that writes to file using std::ofstream.
+ * @implements IWriter
+ * 
+ */
 class ToFileWriter : public IWriter
 {
 public:

@@ -1,6 +1,5 @@
 /**
  * @file writer.hpp
- * @brief 
  */
 #pragma once
 #include "data.hpp"

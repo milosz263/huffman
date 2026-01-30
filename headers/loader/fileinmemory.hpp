@@ -1,7 +1,15 @@
+/**
+ * @file loader/fileinmemory.hpp
+ * Internal file.
+ */
 #pragma once
 
 #include "loader.hpp"
 
+/**
+ * @brief Class that reads entire file to memory at start using std::ifstream.
+ * @implements ILoader
+ */
 class FileInMemoryLoader : public ILoader
 {
 public:
